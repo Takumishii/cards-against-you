@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://b1qk5xrquvkj8" path="res://Scripts/card.gd" id="1_0qqmn"]
 
 [node name="card" type="PanelContainer" unique_id=1755536782]
-custom_minimum_size = Vector2(180, 260)
+custom_minimum_size = Vector2(180, 240)
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_0qqmn")

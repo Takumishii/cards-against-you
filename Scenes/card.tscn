@@ -6,6 +6,7 @@
 custom_minimum_size = Vector2(180, 240)
 offset_right = 40.0
 offset_bottom = 40.0
+pivot_offset = Vector2(0, 240)
 script = ExtResource("1_0qqmn")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1644508713]

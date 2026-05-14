@@ -1,6 +1,6 @@
 extends Node
 
-@onready var hand_container = $"../Hand"
+@onready var hand_container = $"../VBoxContainer/Hand"
 
 var card_scene = preload("res://Scenes/card.tscn")
 
@@ -15,7 +15,7 @@ func _ready():
 
 
 func draw_hand():
-	for i in range(10):
+	for i in range(7):
 		add_card()
 
 
@@ -29,34 +29,45 @@ func add_card():
 	hand_container.add_child(new_card)
 
 	update_hand_layout()
-
+	
 func update_hand_layout():
 	var n = hand_container.get_child_count()
 	if n == 0:
 		return
 
-	var max_width = 600.0  # ancho total del abanico
+	var size = hand_container.size
+	var center = size * 0.5
+
+	# ancho del abanico basado en el contenedor
+	var max_width = size.x * 0.9
+
+	# arco del abanico
+	var angle_range = deg_to_rad(75)
 
 	for i in range(n):
 		var card = hand_container.get_child(i)
 
-		var t = 0.0
+		var t := 0.0
 		if n > 1:
-			t = float(i) / float(n - 1)  # 0 → 1
+			t = float(i) / float(n - 1)
 
-		# centro (-1 a 1)
-		var x_norm = (t - 0.5) * 2.0
+		# ángulo entre izquierda y derecha
+		var angle = lerp(-angle_range, angle_range, t)
 
-		# curva tipo arco
-		var y_offset = -abs(x_norm) * 40.0
+		# radio del abanico (horizontal)
+		var radius = max_width * 0.5
 
-		# posición final
-		var x = x_norm * max_width * 0.5
-		var y = y_offset
+		# posición en arco
+		var x = sin(angle) * radius
+		var y = -cos(angle) * 60.0 + 60.0
 
-		# rotación suave en abanico
-		var rot = x_norm * deg_to_rad(20)
+		# compensación por pivot inferior (IMPORTANTE)
+		var card_offset = Vector2(card.size.x * 0.5, card.size.y)
 
-		card.position = Vector2(x, y)
-		card.rotation = rot
+		card.position = center + Vector2(x, y) - card_offset
+
+		# rotación del abanico
+		card.rotation = angle * 0.6
+
+		# orden visual++++++++++++++++++++
 		card.z_index = i

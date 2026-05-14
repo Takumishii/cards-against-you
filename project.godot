@@ -15,6 +15,10 @@ run/main_scene="uid://c34rrkdma3mly"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+CardDatabase="*uid://b6grlkn5l04ah"
+
 [display]
 
 window/size/viewport_width=540
@@ -36,4 +40,3 @@ theme/custom_font="uid://y48dfjq34lc8"
 rendering_device/driver.windows="d3d12"
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
-environment/defaults/default_clear_color=Color(1, 1, 1, 1)

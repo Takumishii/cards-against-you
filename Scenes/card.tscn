@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://bks6vn20s0p01"]
+
+[ext_resource type="Script" uid="uid://b1qk5xrquvkj8" path="res://Scripts/card.gd" id="1_0qqmn"]
+
+[node name="card" type="PanelContainer" unique_id=1755536782]
+custom_minimum_size = Vector2(180, 260)
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_0qqmn")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1644508713]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Label" type="Label" parent="MarginContainer" unique_id=1693488579]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 36
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3

@@ -32,42 +32,53 @@ func add_card():
 	
 func update_hand_layout():
 	var n = hand_container.get_child_count()
+
 	if n == 0:
 		return
 
 	var size = hand_container.size
 	var center = size * 0.5
 
-	# ancho del abanico basado en el contenedor
+	# ancho máximo del abanico
 	var max_width = size.x * 0.9
 
-	# arco del abanico
+	# apertura del abanico
 	var angle_range = deg_to_rad(75)
 
 	for i in range(n):
 		var card = hand_container.get_child(i)
 
+		# NO mover cartas seleccionadas
+		if card.selected:
+			continue
+
 		var t := 0.0
+
 		if n > 1:
 			t = float(i) / float(n - 1)
 
-		# ángulo entre izquierda y derecha
+		# ángulo del abanico
 		var angle = lerp(-angle_range, angle_range, t)
 
-		# radio del abanico (horizontal)
+		# radio horizontal
 		var radius = max_width * 0.5
 
-		# posición en arco
+		# posición curva
 		var x = sin(angle) * radius
 		var y = -cos(angle) * 60.0 + 60.0
 
-		# compensación por pivot inferior (IMPORTANTE)
+		# compensar pivot inferior
 		var card_offset = Vector2(card.size.x * 0.5, card.size.y)
 
+		# posición final
 		card.position = center + Vector2(x, y) - card_offset
 
-		# rotación del abanico
-		card.rotation = angle * 0.6
+		# guardar base para animaciones
+		card.base_position = card.position
+		card.base_rotation = angle * 0.6
 
-		# orden visual++++++++++++++++++++
+		# aplicar rotación
+		card.rotation = card.base_rotation
+
+		# orden visual
 		card.z_index = i
